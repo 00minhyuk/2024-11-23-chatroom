@@ -1,10 +1,7 @@
 package me.kimminhyuk.chatroom.domain.chat.chatroom.controller;
 
 import me.kimminhyuk.chatroom.domain.chat.chatroom.entity.ChatRoom;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -13,6 +10,9 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/chat/rooms")
+@CrossOrigin(
+        origins = "https://cdpn.io"
+)
 public class ApiV1ChatRoomControllers {
 
     private final List<ChatRoom> chatRooms = new ArrayList<>() {{
