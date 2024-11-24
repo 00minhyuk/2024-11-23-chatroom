@@ -1,5 +1,7 @@
 package me.kimminhyuk.chatroom.domain.chat.chatroom.controller;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import me.kimminhyuk.chatroom.domain.chat.chatroom.entity.ChatRoom;
 import org.springframework.web.bind.annotation.*;
 
@@ -57,6 +59,30 @@ public class ApiV1ChatRoomControllers {
 
        return opChatRoom.get();
     }
+    @AllArgsConstructor
+    @Getter
+    public static class ChatCreateReqBody {
+        private String name;
+    }
+
+    @PostMapping
+    public ChatRoom createChatRoom(
+            @RequestBody ChatCreateReqBody reqBody
+    ){
+        ChatRoom chatRoom = ChatRoom
+                .builder()
+                .id(chatRooms.size() + 1)
+                .createDate(LocalDateTime.now())
+                .modifyDate(LocalDateTime.now())
+                .name(reqBody.name)
+                .build();
+
+        chatRooms.add(chatRoom);
+
+
+        return chatRoom;
+    }
+
     private Optional<ChatRoom> findById(long id) {
         return chatRooms.stream()
                 .filter(chatRoom -> chatRoom.getId() == id)
